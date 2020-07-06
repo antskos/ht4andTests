@@ -1,0 +1,223 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:ht1"
+        xmlns:Views="clr-namespace:ht1.Views"
+        x:Class="ht1.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ShinyBlue.xaml"/>
+            </ResourceDictionary.MergedDictionaries>-->
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <LinearGradientBrush  EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Offset="0.2" Color="#FFD41313"/>
+                            <GradientStop Color="#FF802121" Offset="0.5"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel x:Name="dockPanell" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Menu DockPanel.Dock="Top" x:Name="Menu" HorizontalAlignment="Stretch" Height="Auto" Margin="0">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Выход" Click="CloseCmd_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Помощь"/>
+        </Menu>
+        <TabControl x:Name="tabControl" DockPanel.Dock="Top">
+            <TabItem Header="Формирование группы рассылки">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ToolBarTray Height="65" Width="Auto" VerticalAlignment="Top" IsManipulationEnabled="True" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <ToolBar x:Name="tbSender" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="505">
+                            <Label x:Name="lblSenser" Content="Выбрать отправителя" Height="25" Width="130" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbSenderSelect" Height="25" Width="270" SelectedIndex="0" ToolTip="Выбрать email отправителя"/>
+                            <Button x:Name="btnAddSender" Height="25" Width="25" ToolTip="Добавить">
+                                <Image Source="Resources/Images/add.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                            <Button x:Name="btnEditSender" Height="25" Width="25" ToolTip="Редактировать">
+                                <Image Source="Resources/Images/edit.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                            <Button x:Name="btnDeleteSender" Height="25" Width="25" ToolTip="Удалить">
+                                <Image Source="Resources/Images/remove.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar x:Name="tbPlanner" Height="30" Width="250" Band="0" BandIndex="1" HorizontalAlignment="Left">
+                            <Label x:Name="lblPlanner" Content="Перейти в планировщик" Height="25" Width="Auto" VerticalAlignment="Top"/>
+                            <Button x:Name="btnClock" Height="25" Width="25" ToolTip="Перейти в планировщик"
+                                    Click="Clock_Click">
+                                <Image Source="Resources/Images/clock.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar x:Name="tbSmtp" Height="30" VerticalAlignment="Bottom" Width="505" Band="1" HorizontalAlignment="Left">
+                            <Label x:Name="lblSmtp" Content="Выбрать smtp-server" Height="25" Width="130" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbSmtp" Height="25" Width="270" SelectedIndex="0" ToolTip="Выбрать smtp-сервер"/>
+                            <Button x:Name="btnAddSmtp" Height="25" Width="25" ToolTip="Добавить">
+                                <Image Source="Resources/Images/add.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                            <Button x:Name="btnEditSmtp" Height="25" Width="25" ToolTip="Редактировать">
+                                <Image Source="Resources/Images/edit.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                            <Button x:Name="btnDeleteSmtp" Height="25" Width="25" ToolTip="Удалить">
+                                <Image Source="Resources/Images/remove.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar x:Name="tbAddressees" Height="30" Width="250" Band="1" BandIndex="1" HorizontalAlignment="Left">
+                            <Label x:Name="lblAddressees" Content="Список адресатов" Height="25" Width="Auto" VerticalAlignment="Top"/>
+                            <Button x:Name="btnAddAddress" Height="25" Width="25" ToolTip="Добавить" FocusManager.FocusedElement= "{Binding ElementName=saveEmail}" >
+                                <Image Source="Resources/Images/add.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                            <Button x:Name="btnEditAddress" Height="25" Width="25" ToolTip="Редактировать">
+                                <Image Source="Resources/Images/edit.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                            <Button x:Name="btnDeleteAddress" Height="25" Width="25" ToolTip="Удалить">
+                                <Image Source="Resources/Images/remove.png" HorizontalAlignment = "Right"/>
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <Views:RecipientsList Grid.Row = "1" x:Name = "recipients" VerticalAlignment ="Top" HorizontalAlignment = "Center" Margin="5"/>
+                    <!--<DataGrid x:Name="dgEmails" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0.2,0,0.4"/>-->
+                    <ScrollViewer Grid.Row = "1" Grid.Column = "2">
+                        <Grid x:Name="ForLookingEmails">
+                            <Grid.RowDefinitions>
+                                <RowDefinition MinHeight="100" Height="2*"/>
+                                <RowDefinition MinHeight="70" Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Views:EmailInfoView x:Name = "emailInfo" VerticalAlignment ="Top" HorizontalAlignment = "Center" Margin="5"/>
+                            <Views:SaveEmailView x:Name = "saveEmail" Grid.Row = "1" VerticalAlignment = "Top" HorizontalAlignment = "Center" Margin="10" MinWidth="200"/>
+                        </Grid>
+                    </ScrollViewer>    
+                    <local:TabSwitcherControl Grid.Row="2" Grid.ColumnSpan="2" IsHideBtnPrevious="True" BtnNextClick="TabSwitcherControl_btnNextClick"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabPlanner" Header ="Планировщик">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="220"/>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Column="0" Grid.Row="0" Click="AddLetter_Click">
+                            <StackPanel Orientation="Horizontal" MinWidth="240">
+                                <Image Source="Resources/Images/addLetter.png" HorizontalAlignment="Left" Margin="15,0,0,0"/>
+                                <TextBlock TextAlignment="Left" FontSize="16" HorizontalAlignment="Right" Margin="40,3,0,0" Text="Добавить письмо"/>
+                            </StackPanel>
+                        </Button>
+                        <ListView x:Name="letters" Grid.Row="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Views:SendTimeView></Views:SendTimeView>
+                                    <!--<GridViewColumn Header="Список писем для отправки">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding Views.SendTimeView}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>-->
+                                    <!--<GridViewColumn DisplayMemberBinding="{Binding ElementName=Views.SendTimeView}" Header="Список писем для отправки"></GridViewColumn>-->
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid> 
+                    
+                    <Calendar x:Name="cldSchedulDateTimes" Grid.Column="1" Height="160" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Calendar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1.3" ScaleX="1.3"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Calendar.RenderTransform>
+                    </Calendar>
+                    <xctk:TimePicker x:Name="timePickerBox" Grid.Column="1" Grid.Row="1" Width="250" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Button Grid.Row="1" x:Name="btnSendLater" Click="BtnSendLater_Click" Height="45" VerticalAlignment="Bottom" FontSize="14">
+                        <StackPanel Orientation="Horizontal" MinWidth="240">
+                            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" FontSize="16"><Run Text="Отправить"/><LineBreak/><Run Text="в указанное время"/></TextBlock>
+                            <Image Source="Resources/Images/sendLater.png" Height="35" HorizontalAlignment="Right" Margin="60,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Row="2" x:Name="btnSendNow" Click="BtnSendNow_Click" Height="40" VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Horizontal" MinWidth="240">
+                            <TextBlock TextAlignment="Left" FontSize="16" HorizontalAlignment="Left" Margin="10,7,0,0" Text="Отправить сейчас"/>
+                            <Image Source="Resources/Images/sendNow.png" HorizontalAlignment="Right" Margin="60,7,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <local:TabSwitcherControl Grid.Row="4" Grid.ColumnSpan="2" BtnNextClick="TabSwitcherControl_btnNextClick" BtnPreviousClick="TabSwitcherControl_btnPreviousClick"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Редактор писем">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label>
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Left" FontSize="16"><Run Text="Тема"/><LineBreak/><Run Text="письма:"/></TextBlock>
+                    </Label>
+                    <Label Grid.Row="1">
+                        <TextBlock TextAlignment="Center" HorizontalAlignment="Left" FontSize="16"><Run Text="Текст"/><LineBreak/><Run Text="письма:"/></TextBlock>
+                    </Label>
+                    <RichTextBox x:Name="LetterSubject" Grid.Column="1"/>
+                    <RichTextBox x:Name="LetterBody" Grid.Row="1" Grid.Column="1"/>
+                    <local:TabSwitcherControl Grid.Row="2" Grid.ColumnSpan="2" BtnNextClick="TabSwitcherControl_btnNextClick" BtnPreviousClick="TabSwitcherControl_btnPreviousClick"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Статистика">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <local:TabSwitcherControl Grid.Row="1" Grid.ColumnSpan="2" IsHideBtnNext="True" BtnPreviousClick="TabSwitcherControl_btnPreviousClick"/>
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
+    </DockPanel>
+</Window>

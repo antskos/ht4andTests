@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="ht1.Views.EmailInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mvvm = "http://www.galasoft.ch/mvvmlight"
+             xmlns:local="clr-namespace:ht1.Views"
+             mc:Ignorable="d"
+             DataContext = "{Binding Main, Source={StaticResource Locator}}"
+             Height="Auto" Width="Auto">
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height = "Auto" />
+            <RowDefinition Height = "Auto" />
+            <RowDefinition Height = "Auto" />
+            <RowDefinition Height = "Auto" />
+        </Grid.RowDefinitions >
+        <TextBlock TextWrapping = "Wrap" TextAlignment = "Center" Text = "Выбрать получателей:" FontWeight = "Bold" Margin="15" />
+        <Button x:Name = "btnLoadAllEmails" Content = "Добавить в список получателей" Grid.Row = "3"
+                FontWeight = "Bold" Width = "200" Command = "{Binding AddRecipientsCommand}" CommandParameter = "{Binding ElementName = dgEmails, Path = SelectedItems}"/>
+        <DataGrid x:Name = "dgEmails" Grid.Row = "2" ItemsSource = "{Binding Emails}" ColumnWidth = "*" Margin = "5,10,5,28"
+                  RenderTransformOrigin = "0.5,0.5" IsReadOnly = "True" >
+        </DataGrid >
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Grid.Row = "1">
+        <TextBlock HorizontalAlignment = "Left" Margin = "10,10,0,0" Grid.Row = "1"
+                   Text = "Поиск по имени:" VerticalAlignment = "Center"/>
+            <TextBox HorizontalAlignment = "Left" MinHeight = "20" Margin = "10" Grid.Row = "1"
+                 TextWrapping = "Wrap" VerticalAlignment = "Top" MinWidth = "50">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName = "TextChanged" >
+                        <mvvm:EventToCommand Command = "{Binding FindByNameCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}, Path=Text}" />
+                    </i:EventTrigger >
+                </i:Interaction.Triggers>
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

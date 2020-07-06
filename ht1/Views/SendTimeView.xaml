@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ht1.Views.SendTimeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ht1.Views"
+             mc:Ignorable="d"
+             DataContext = "{Binding Main, Source={StaticResource Locator}}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Height="20" Width="240">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="editLetterBtn">
+            <Image Source="C:\Users\Антон\Documents\Visual Studio 2019\geekbrains\CSharpLevel3\ht4andTests\ht1\Resources\Images\editLetter.png"/>
+        </Button>
+        <TextBox x:Name="sendDate" Grid.Column="1"/>
+        <Button x:Name="removeLetterBtn" Grid.Column="2">
+            <Image Source="C:\Users\Антон\Documents\Visual Studio 2019\geekbrains\CSharpLevel3\ht4andTests\ht1\Resources\Images\removeFromList.png"/>
+        </Button>
+    </Grid>
+</UserControl>

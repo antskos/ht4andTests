@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ht1", "ht1\ht1.csproj", "{27ECFFF9-8627-406E-B631-A9DB6BBD0DF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{15E07D30-71FE-4303-A436-1B502B51F628}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordDll.Test", "Tests\PasswordDll.Test\PasswordDll.Test.csproj", "{0A3473ED-881B-4FC5-9A20-0D288194F837}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27ECFFF9-8627-406E-B631-A9DB6BBD0DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27ECFFF9-8627-406E-B631-A9DB6BBD0DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27ECFFF9-8627-406E-B631-A9DB6BBD0DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27ECFFF9-8627-406E-B631-A9DB6BBD0DF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A3473ED-881B-4FC5-9A20-0D288194F837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A3473ED-881B-4FC5-9A20-0D288194F837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A3473ED-881B-4FC5-9A20-0D288194F837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A3473ED-881B-4FC5-9A20-0D288194F837}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A3473ED-881B-4FC5-9A20-0D288194F837} = {15E07D30-71FE-4303-A436-1B502B51F628}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8CB227C-6407-44A7-AC5B-7051CCC70652}
+	EndGlobalSection
+EndGlobal

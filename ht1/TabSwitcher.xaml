@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="ht1.TabSwitcherControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ht1"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" MinWidth="230" Height="30">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="col1" Width="*"/>
+            <ColumnDefinition x:Name="col2" Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnPrevious" MinWidth="115" Height="29" Margin="1" Click="BtnPrevious_Click">
+            <Button.Content>
+                <StackPanel Orientation = "Horizontal">
+                    <Image Source="Resources/Images/arrowLeft.png" Width = "30" Height = "16" />
+                    <TextBlock Margin = "3,0,0,0" Text = "Назад" VerticalAlignment = "Center" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button x:Name="btnNext" MinWidth="115" Height="29" Grid.Column="1" Margin="1" Click="BtnNext_Click">
+            <Button.Content>
+                <StackPanel Orientation = "Horizontal">
+                    <TextBlock Margin = "3,0,0,0" Text = "Вперёд" VerticalAlignment = "Center" />
+                    <Image Source="Resources/Images/arrowRight.png" Width = "30" Height = "16" Margin = "5,0,0,0" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>
